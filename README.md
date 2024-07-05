@@ -482,6 +482,26 @@ WHERE
     cli.codigo_empleado_rep_ventas = emp.codigo_empleado
 AND
     cli.codigo_cliente = p.codigo_cliente;
+```
+
+### SQL2
+
+```sql
+
+SELECT
+    cli.nombre_cliente,
+    emp.nombre AS nombreRepresentante
+FROM
+    cliente AS cli
+JOIN 
+    empleado AS emp
+ON
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+RIGHT JOIN 
+    pago AS pa
+ON
+    pa.codigo_cliente = cli.codigo_cliente;
+
 ``` 
 
 <br>
@@ -524,6 +544,24 @@ WHERE
 AND 
     cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p);
 ``` 
+### SQL2
+
+```sql
+
+SELECT
+    cli.nombre_cliente,
+    emp.nombre AS nombreRepresentante
+FROM
+    cliente AS cli
+JOIN 
+    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+LEFT JOIN
+    pago AS p ON cli.codigo_cliente = p.codigo_cliente
+WHERE 
+    p.codigo_cliente IS NULL;
+
+
+```
 
 <br>
 
@@ -570,6 +608,25 @@ AND
     emp.codigo_oficina = o.codigo_oficina
 ;
 ``` 
+### SQL2
+
+```sql
+
+SELECT
+    cli.nombre_cliente,
+    emp.nombre AS nombreRepresentante,
+    ofi.ciudad AS ciudadRepresentante
+FROM
+    cliente AS cli
+JOIN 
+    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+JOIN
+    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina
+JOIN
+    pago AS p ON cli.codigo_cliente = p.codigo_cliente;
+
+
+```
 
 <br>
 
@@ -639,6 +696,27 @@ WHERE
     o.
 ;
 ``` 
+### SQL2
+
+```sql
+
+SELECT
+    cli.nombre_cliente,
+    emp.nombre AS nombreRepresentante,
+    ofi.ciudad AS ciudadRepresentante
+FROM
+    cliente AS cli
+JOIN 
+    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+JOIN
+    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina
+LEFT JOIN
+    pago AS p ON cli.codigo_cliente = p.codigo_cliente
+WHERE
+    p.codigo_cliente IS NULL;
+
+
+```
 
 <br>
 
