@@ -727,6 +727,267 @@ WHERE
 
 <br>
 
+### SQL2
+
+```sql
+
+SELECT DISTINCT
+    o.linea_direccion1,
+    o.linea_direccion2,
+    o.ciudad,
+    o.region,
+    o.pais,
+    o.codigo_postal
+FROM
+    oficina o
+JOIN
+    empleado e ON o.codigo_oficina = e.codigo_oficina
+JOIN
+    cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+WHERE
+    c.ciudad = 'Fuenlabrada';
+
+```
+<br>
+
 ---
 
+## 7. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
 
+<br>
+
+### SQL2
+
+```sql
+
+SELECT
+    cli.nombre_cliente AS Nombre_Cliente,
+    CONCAT(emp.nombre, ' ', emp.apellido1) AS Nombre_Representante,
+    ofi.ciudad AS Ciudad_Oficina_Representante
+FROM
+    cliente AS cli
+JOIN
+    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+JOIN
+    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina;
+
+
+```
+
+<br>
+
+---
+
+## 8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+
+<br>
+
+### SQL2
+
+```sql
+
+SELECT
+    emp1.nombre,
+    emp2.nombre AS nombreJefe
+FROM empleado AS emp1
+LEFT JOIN empleado AS emp2
+ON emp1.codigo_jefe = emp2.codigo_empleado;
+
+```
+
+<br>
+
+---
+
+## 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+
+<br>
+
+### SQL2
+
+```sql
+
+SELECT 
+    e1.nombre AS nombre_empleado,
+    e2.nombre AS nombre_jefe,
+    e3.nombre AS nombre_jefe_de_jefe
+FROM 
+    empleado AS e1
+LEFT JOIN 
+    empleado AS e2 
+ON 
+    e1.codigo_jefe = e2.codigo_empleado
+LEFT JOIN 
+    empleado AS e3 
+ON 
+    e2.codigo_jefe = e3.codigo_empleado;
+
+```
+
+<br>
+
+---
+
+## 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+
+<br>
+
+### SQL2
+
+```sql
+
+SELECT DISTINCT
+    cli.nombre_cliente AS Nombre_Cliente
+FROM
+    cliente AS cli
+JOIN
+    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
+WHERE
+    ped.fecha_entrega > ped.fecha_esperada;
+
+
+```
+
+<br>
+
+---
+
+### 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+
+<br>
+
+## SQL2
+
+```sql
+
+SELECT
+    cli.nombre_cliente AS Nombre_Cliente,
+    pro.gama AS Gama_Producto
+FROM
+    cliente AS cli
+JOIN
+    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
+JOIN
+    detalle_pedido AS det ON ped.codigo_pedido = det.codigo_pedido
+JOIN
+    producto AS pro ON det.codigo_producto = pro.codigo_producto
+GROUP BY
+    cli.nombre_cliente, pro.gama
+
+```
+
+<br>
+
+---
+
+# Consultas multitabla (Composición externa)
+Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN, NATURAL
+LEFT JOIN y NATURAL RIGHT JOIN.
+
+---
+
+<br>
+
+## 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+
+<br>
+
+```sql
+
+SELECT
+    cli.codigo_cliente,
+    cli.nombre_cliente AS Nombre_Cliente
+FROM
+    cliente AS cli
+LEFT JOIN
+    pago AS pag ON cli.codigo_cliente = pag.codigo_cliente
+WHERE
+    pag.codigo_cliente IS NULL;
+
+
+```
+
+<br>
+
+---
+
+## 2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
+
+<br>
+
+```sql
+
+SELECT
+    cli.codigo_cliente,
+    cli.nombre_cliente AS Nombre_Cliente
+FROM
+    cliente AS cli
+LEFT JOIN
+    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
+WHERE
+    ped.codigo_pedido IS NULL;
+
+
+```
+
+<br>
+
+---
+
+## 3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
+
+<br>
+
+```sql
+
+SELECT DISTINCT
+    cli.codigo_cliente,
+    cli.nombre_cliente AS Nombre_Cliente
+FROM
+    cliente AS cli
+LEFT JOIN
+    pago AS pag ON cli.codigo_cliente = pag.codigo_cliente
+LEFT JOIN
+    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
+WHERE
+    pag.codigo_cliente IS NULL OR ped.codigo_cliente IS NULL;
+
+
+```
+
+<br>
+
+---
+
+## 4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada
+
+<br>
+
+```sql
+
+SELECT
+    emp.codigo_empleado,
+    CONCAT(emp.nombre, ' ', emp.apellido1) AS Nombre_Empleado
+FROM
+    empleado AS emp
+LEFT JOIN
+    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina
+WHERE
+    emp.codigo_oficina IS NULL;
+
+
+```
+
+<br>
+
+---
+
+## 5. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
+
+<br>
+
+```sql
+
+
+
+```
