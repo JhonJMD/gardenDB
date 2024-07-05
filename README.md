@@ -722,4 +722,11 @@ WHERE
 
 ---
 
+## 6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+
+
+<br>
+
+---
+
 
