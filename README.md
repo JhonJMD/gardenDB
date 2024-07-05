@@ -708,6 +708,9 @@ AND
 SELECT 
     o.linea_direccion1 AS direccion1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2353943 (safe commit)
     o.linea_direccion2 AS direccion2
 FROM 
     oficina AS o, cliente AS cli, empleado AS emp
@@ -725,6 +728,153 @@ AND
 ---
 
 ## 7. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+<<<<<<< HEAD
+=======
+
+<br>
+
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante,
+    o.ciudad AS ciudad_oficina
+FROM 
+    cliente AS cli, empleado AS emp, oficina AS o
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND
+    emp.codigo_oficina = o.codigo_oficina
+;
+``` 
+
+<br>
+
+---
+
+## 8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+
+<br>
+
+### SQL1
+
+```sql
+SELECT 
+    CONCAT(emp1.nombre, ' ', emp1.apellido1) AS nombre_empleado,
+    (SELECT 
+        CONCAT(emp2.nombre, ' ', emp2.apellido1)
+    FROM 
+        empleado AS emp2
+    WHERE 
+        emp2.codigo_empleado = emp1.codigo_jefe
+    ) AS nombre_jefe
+FROM 
+    empleado AS emp1
+;
+
+``` 
+
+<br>
+
+---
+
+## 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+
+<br>
+
+### SQL1
+
+```sql
+SELECT 
+    CONCAT(emp1.nombre, ' ', emp1.apellido1) AS nombre_empleado,
+    (
+        SELECT 
+            CONCAT(emp2.nombre, ' ', emp2.apellido1)
+        FROM 
+            empleado emp2
+        WHERE 
+            emp2.codigo_empleado = emp1.codigo_jefe
+    ) AS nombre_jefe,
+    (
+        SELECT 
+            CONCAT(emp3.nombre, ' ', emp3.apellido1)
+        FROM 
+            empleado emp2, empleado emp3
+        WHERE 
+            emp2.codigo_empleado = emp1.codigo_jefe
+        AND 
+            emp2.codigo_jefe = emp3.codigo_empleado
+    ) AS nombre_jefe_del_jefe
+FROM 
+    empleado emp1
+;
+``` 
+
+<br>
+
+---
+
+## 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+
+<br>
+
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente
+FROM 
+    cliente AS cli
+WHERE EXISTS (
+    SELECT 
+        1
+    FROM 
+        pedido p
+    WHERE 
+        p.codigo_cliente = cli.codigo_cliente
+    AND 
+        p.fecha_entrega > p.fecha_esperada
+)
+;
+
+``` 
+
+<br>
+
+---
+
+## 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+
+<br>
+
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente,
+    (
+        SELECT DISTINCT 
+            pr.gama
+        FROM 
+            producto AS pr, pedido  AS pe, detalle_pedido AS dp
+        WHERE 
+            pe.codigo_cliente = cli.codigo_cliente
+        AND 
+            pe.codigo_pedido = dp.codigo_pedido
+        AND 
+            dp.codigo_producto = pr.codigo_producto
+    ) AS gamas_compradas
+FROM 
+    cliente AS cli
+;
+``` 
+
+<br>
+
+---
+>>>>>>> 2353943 (safe commit)
 
 <br>
 
