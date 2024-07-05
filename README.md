@@ -418,6 +418,7 @@ SELECT
     cli.nombre_cliente AS nombre_cliente,
     emp.nombre AS nombre_representante,
     emp.apellido1 AS apellido_representante
+<<<<<<< HEAD
 FROM 
     cliente AS cli, empleado AS emp
 WHERE 
@@ -425,9 +426,12 @@ WHERE
     cli.nombre_cliente,
     emp.nombre,
     emp.apellido1
+=======
+>>>>>>> 5e0f5c9 (safe commit)
 FROM 
-    cliente AS cli
-
+    cliente AS cli, empleado AS emp
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado; 
 ``` 
 
 <br>
@@ -497,10 +501,17 @@ RIGHT JOIN
     pago AS pa
 ON
     pa.codigo_cliente = cli.codigo_cliente;
-```
 
-=======
->>>>>>> b07554b (safe commit)
+``` 
+
+<br>
+
+---
+
+## 3. Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas.
+
+<br>
+
 ### SQL1
 
 ```sql
@@ -543,22 +554,6 @@ WHERE
 
 
 ```
-=======
->>>>>>> b07554b (safe commit)
-### SQL1
-
-```sql
-SELECT 
-    cli.nombre_cliente AS nombre_cliente,
-    emp.nombre AS nombre_representante,
-    emp.apellido1 AS apellido_representante
-FROM 
-    cliente AS cli, empleado AS emp, pago AS p
-WHERE 
-    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
-AND 
-    cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p);
-``` 
 
 <br>
 
@@ -639,8 +634,15 @@ WHERE
 
 
 ```
-=======
->>>>>>> b07554b (safe commit)
+
+<br>
+
+---
+
+## 5. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+
+<br>
+
 ### SQL1
 
 ```sql
@@ -961,139 +963,26 @@ WHERE
 
 
 ```
-
-<br>
-
----
-
-### 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
-
-<br>
-
-## SQL2
+### SQL1
 
 ```sql
-
-SELECT
-    cli.nombre_cliente AS Nombre_Cliente,
-    pro.gama AS Gama_Producto
-FROM
-    cliente AS cli
-JOIN
-    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
-JOIN
-    detalle_pedido AS det ON ped.codigo_pedido = det.codigo_pedido
-JOIN
-    producto AS pro ON det.codigo_producto = pro.codigo_producto
-GROUP BY
-    cli.nombre_cliente, pro.gama
-
-```
-
-<br>
-
----
-
-# Consultas multitabla (Composición externa)
-Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN, NATURAL
-LEFT JOIN y NATURAL RIGHT JOIN.
-
----
-
-<br>
-
-## 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-
-<br>
-
-```sql
-
-SELECT
-    cli.codigo_cliente,
-    cli.nombre_cliente AS Nombre_Cliente
-FROM
-    cliente AS cli
-LEFT JOIN
-    pago AS pag ON cli.codigo_cliente = pag.codigo_cliente
-WHERE
-    pag.codigo_cliente IS NULL;
-
-
-```
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante,
+    o.ciudad AS ciudad_oficina
+FROM 
+    cliente AS cli, empleado AS emp, pago AS p, oficina AS o
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND 
+    cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p)
+AND
+    emp.codigo_oficina = o.codigo_oficina
+;
+``` 
 
 <br>
 
 ---
-
-## 2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
-
-<br>
-
-```sql
-
-SELECT
-    cli.codigo_cliente,
-    cli.nombre_cliente AS Nombre_Cliente
-FROM
-    cliente AS cli
-LEFT JOIN
-    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
-WHERE
-    ped.codigo_pedido IS NULL;
-
-
-```
-
-<br>
-
----
-
-## 3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
-
-<br>
-
-```sql
-
-SELECT DISTINCT
-    cli.codigo_cliente,
-    cli.nombre_cliente AS Nombre_Cliente
-FROM
-    cliente AS cli
-LEFT JOIN
-    pago AS pag ON cli.codigo_cliente = pag.codigo_cliente
-LEFT JOIN
-    pedido AS ped ON cli.codigo_cliente = ped.codigo_cliente
-WHERE
-    pag.codigo_cliente IS NULL OR ped.codigo_cliente IS NULL;
-
-
-```
-
-<br>
-
----
-
-## 4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada
-
-<br>
-
-```sql
-
-SELECT
-    emp.codigo_empleado,
-    CONCAT(emp.nombre, ' ', emp.apellido1) AS Nombre_Empleado
-FROM
-    empleado AS emp
-LEFT JOIN
-    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina
-WHERE
-    emp.codigo_oficina IS NULL;
-
-
-```
-
-<br>
-
----
-
 
