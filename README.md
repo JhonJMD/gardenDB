@@ -419,6 +419,7 @@ SELECT
     emp.nombre AS nombre_representante,
     emp.apellido1 AS apellido_representante
 <<<<<<< HEAD
+<<<<<<< HEAD
 FROM 
     cliente AS cli, empleado AS emp
 WHERE 
@@ -428,6 +429,8 @@ WHERE
     emp.apellido1
 =======
 >>>>>>> 5e0f5c9 (safe commit)
+=======
+>>>>>>> b07554b (safe commit)
 FROM 
     cliente AS cli, empleado AS emp
 WHERE 
@@ -436,6 +439,7 @@ WHERE
 
 <br>
 
+<<<<<<< HEAD
 ### SQL2 
 
 ```sql
@@ -477,12 +481,15 @@ ON
 
 =======
 >>>>>>> b07554b (safe commit)
+=======
+>>>>>>> b07554b (safe commit)
 ---
 
 ## 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
 
 <br>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ### SQL2
 
@@ -512,6 +519,8 @@ ON
 
 <br>
 
+=======
+>>>>>>> b07554b (safe commit)
 ### SQL1
 
 ```sql
@@ -536,6 +545,7 @@ AND
 <br>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -554,6 +564,22 @@ WHERE
 
 
 ```
+=======
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante
+FROM 
+    cliente AS cli, empleado AS emp, pago AS p
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND 
+    cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p);
+``` 
+>>>>>>> b07554b (safe commit)
 
 <br>
 
@@ -563,6 +589,7 @@ WHERE
 
 <br>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ### SQL2
 
@@ -583,6 +610,8 @@ JOIN
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 =======
 >>>>>>> b07554b (safe commit)
 ### SQL1
@@ -612,6 +641,7 @@ AND
 
 <br>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ### SQL2
 
@@ -643,6 +673,8 @@ WHERE
 
 <br>
 
+=======
+>>>>>>> b07554b (safe commit)
 ### SQL1
 
 ```sql
@@ -675,6 +707,7 @@ AND
 ```sql
 SELECT 
     o.linea_direccion1 AS direccion1,
+<<<<<<< HEAD
     o.linea_direccion2 AS direccion2
 FROM 
     oficina AS o, cliente AS cli, empleado AS emp
@@ -997,6 +1030,8 @@ AND
 ```sql
 SELECT 
     o.linea_direccion1 AS direccion1,
+=======
+>>>>>>> b07554b (safe commit)
     o.linea_direccion2 AS direccion2,
 FROM 
     oficina AS o, cliente AS cli, empleado
@@ -1004,6 +1039,7 @@ WHERE
     o.
 ;
 ``` 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -1025,11 +1061,14 @@ WHERE
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 
 <br>
 
 ---
 
+<<<<<<< HEAD
 ## 6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
 
 
@@ -1300,3 +1339,6 @@ WHERE
 
 ```
 >>>>>>> 3ccc6fa (feat: Safe)
+=======
+
+>>>>>>> b07554b (safe commit)
