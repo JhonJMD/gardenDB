@@ -414,12 +414,13 @@ sintaxis de SQL2 se deben resolver con INNER JOIN y NATURAL JOIN.
 
 ```sql
 SELECT 
-    cli.nombre_cliente,
-    emp.nombre,
-    emp.apellido1
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante
 FROM 
-    cliente AS cli
-
+    cliente AS cli, empleado AS emp
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado; 
 ``` 
 
 <br>
@@ -466,7 +467,21 @@ RIGHT JOIN
     pago AS pa
 ON
     pa.codigo_cliente = cli.codigo_cliente;
+```
 
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante
+FROM 
+    cliente AS cli, empleado AS emp, pago AS p
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND
+    cli.codigo_cliente = p.codigo_cliente;
 ``` 
 
 <br>
@@ -495,6 +510,20 @@ WHERE
 
 
 ```
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante
+FROM 
+    cliente AS cli, empleado AS emp, pago AS p
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND 
+    cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p);
+``` 
 
 <br>
 
@@ -523,6 +552,24 @@ JOIN
 
 
 ```
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante,
+    o.ciudad AS ciudad_oficina
+FROM 
+    cliente AS cli, empleado AS emp, pago AS p, oficina AS o
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND 
+    cli.codigo_cliente = p.codigo_cliente
+AND
+    emp.codigo_oficina = o.codigo_oficina
+;
+``` 
 
 <br>
 
@@ -553,8 +600,48 @@ WHERE
 
 
 ```
+### SQL1
+
+```sql
+SELECT 
+    cli.nombre_cliente AS nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante,
+    o.ciudad AS ciudad_oficina
+FROM 
+    cliente AS cli, empleado AS emp, pago AS p, oficina AS o
+WHERE 
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
+AND 
+    cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p)
+AND
+    emp.codigo_oficina = o.codigo_oficina
+;
+``` 
 
 <br>
 
 ---
+
+## 6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+
+<br>
+
+### SQL1
+
+```sql
+SELECT 
+    o.linea_direccion1 AS direccion1,
+    o.linea_direccion2 AS direccion2,
+FROM 
+    oficina AS o, cliente AS cli, empleado
+WHERE
+    o.
+;
+``` 
+
+<br>
+
+---
+
 
