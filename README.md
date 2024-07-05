@@ -1,5 +1,6 @@
 # Filtro BASE DE DATOS SQL
-
+# Hecho por Jhoan Sebastian Landazabal
+# Y Jhon Jairo Marín Díaz
 ----
 
 # Consultas sobre una tabla 
@@ -421,7 +422,32 @@ FROM
     cliente AS cli, empleado AS emp
 WHERE 
     cli.codigo_empleado_rep_ventas = emp.codigo_empleado; 
+    cli.nombre_cliente,
+    emp.nombre,
+    emp.apellido1
+FROM 
+    cliente AS cli
+
 ``` 
+
+<br>
+
+### SQL2 
+
+```sql
+
+SELECT
+    cli.nombre_cliente,
+    emp.nombre AS nombre_representante,
+    emp.apellido1 AS apellido_representante
+FROM 
+    cliente AS cli
+JOIN 
+    empleado AS emp
+ON
+    cli.codigo_empleado_rep_ventas = emp.codigo_empleado;
+
+```
 
 <br>
 
@@ -488,29 +514,6 @@ WHERE
     cli.codigo_empleado_rep_ventas = emp.codigo_empleado
 AND
     cli.codigo_cliente = p.codigo_cliente;
-<<<<<<< HEAD
-```
-
-### SQL2
-
-```sql
-
-SELECT
-    cli.nombre_cliente,
-    emp.nombre AS nombreRepresentante
-FROM
-    cliente AS cli
-JOIN 
-    empleado AS emp
-ON
-    cli.codigo_empleado_rep_ventas = emp.codigo_empleado
-RIGHT JOIN 
-    pago AS pa
-ON
-    pa.codigo_cliente = cli.codigo_cliente;
-
-=======
->>>>>>> b07554b (safe commit)
 ``` 
 
 <br>
@@ -556,27 +559,6 @@ WHERE
 AND 
     cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p);
 ``` 
-<<<<<<< HEAD
-### SQL2
-
-```sql
-
-SELECT
-    cli.nombre_cliente,
-    emp.nombre AS nombreRepresentante
-FROM
-    cliente AS cli
-JOIN 
-    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
-LEFT JOIN
-    pago AS p ON cli.codigo_cliente = p.codigo_cliente
-WHERE 
-    p.codigo_cliente IS NULL;
-
-
-```
-=======
->>>>>>> b07554b (safe commit)
 
 <br>
 
@@ -626,28 +608,6 @@ AND
     emp.codigo_oficina = o.codigo_oficina
 ;
 ``` 
-<<<<<<< HEAD
-### SQL2
-
-```sql
-
-SELECT
-    cli.nombre_cliente,
-    emp.nombre AS nombreRepresentante,
-    ofi.ciudad AS ciudadRepresentante
-FROM
-    cliente AS cli
-JOIN 
-    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
-JOIN
-    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina
-JOIN
-    pago AS p ON cli.codigo_cliente = p.codigo_cliente;
-
-
-```
-=======
->>>>>>> b07554b (safe commit)
 
 <br>
 
@@ -870,30 +830,6 @@ FROM
     cliente AS cli
 ;
 ``` 
-<<<<<<< HEAD
-### SQL2
-
-```sql
-
-SELECT
-    cli.nombre_cliente,
-    emp.nombre AS nombreRepresentante,
-    ofi.ciudad AS ciudadRepresentante
-FROM
-    cliente AS cli
-JOIN 
-    empleado AS emp ON cli.codigo_empleado_rep_ventas = emp.codigo_empleado
-JOIN
-    oficina AS ofi ON emp.codigo_oficina = ofi.codigo_oficina
-LEFT JOIN
-    pago AS p ON cli.codigo_cliente = p.codigo_cliente
-WHERE
-    p.codigo_cliente IS NULL;
-
-
-```
-=======
->>>>>>> b07554b (safe commit)
 
 <br>
 
