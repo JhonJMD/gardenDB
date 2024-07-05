@@ -425,6 +425,7 @@ WHERE
 
 <br>
 
+<<<<<<< HEAD
 ### SQL2 
 
 ```sql
@@ -444,12 +445,15 @@ ON
 
 <br>
 
+=======
+>>>>>>> b07554b (safe commit)
 ---
 
 ## 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
 
 <br>
 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -469,6 +473,8 @@ ON
     pa.codigo_cliente = cli.codigo_cliente;
 ```
 
+=======
+>>>>>>> b07554b (safe commit)
 ### SQL1
 
 ```sql
@@ -482,6 +488,7 @@ WHERE
     cli.codigo_empleado_rep_ventas = emp.codigo_empleado
 AND
     cli.codigo_cliente = p.codigo_cliente;
+<<<<<<< HEAD
 ```
 
 ### SQL2
@@ -502,6 +509,8 @@ RIGHT JOIN
 ON
     pa.codigo_cliente = cli.codigo_cliente;
 
+=======
+>>>>>>> b07554b (safe commit)
 ``` 
 
 <br>
@@ -512,6 +521,7 @@ ON
 
 <br>
 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -530,6 +540,8 @@ WHERE
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 ### SQL1
 
 ```sql
@@ -544,6 +556,7 @@ WHERE
 AND 
     cli.codigo_cliente NOT IN (SELECT p.codigo_cliente FROM pago AS p);
 ``` 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -562,6 +575,8 @@ WHERE
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 
 <br>
 
@@ -571,6 +586,7 @@ WHERE
 
 <br>
 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -590,6 +606,8 @@ JOIN
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 ### SQL1
 
 ```sql
@@ -608,6 +626,7 @@ AND
     emp.codigo_oficina = o.codigo_oficina
 ;
 ``` 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -627,6 +646,8 @@ JOIN
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 
 <br>
 
@@ -636,6 +657,7 @@ JOIN
 
 <br>
 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -657,6 +679,8 @@ WHERE
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 ### SQL1
 
 ```sql
@@ -696,6 +720,7 @@ WHERE
     o.
 ;
 ``` 
+<<<<<<< HEAD
 ### SQL2
 
 ```sql
@@ -717,11 +742,14 @@ WHERE
 
 
 ```
+=======
+>>>>>>> b07554b (safe commit)
 
 <br>
 
 ---
 
+<<<<<<< HEAD
 ## 6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
 
 
@@ -991,3 +1019,6 @@ WHERE
 
 
 ```
+=======
+
+>>>>>>> b07554b (safe commit)
