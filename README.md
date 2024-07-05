@@ -414,6 +414,7 @@ sintaxis de SQL2 se deben resolver con INNER JOIN y NATURAL JOIN.
 ### SQL1
 
 ```sql
+<<<<<<< HEAD
 SELECT 
     cli.nombre_cliente AS nombre_cliente,
     emp.nombre AS nombre_representante,
@@ -973,19 +974,19 @@ SELECT
 FROM 
     cliente AS cli
 WHERE EXISTS (
+=======
+>>>>>>> c8291db (feat: :docs: multitablas 5)
     SELECT 
-        1
+        cli.nombre_cliente,
+        emp.nombre,
+        emp.apellido1
     FROM 
-        pedido p
+        cliente AS cli, empleado AS emp
     WHERE 
-        p.codigo_cliente = cli.codigo_cliente
-    AND 
-        p.fecha_entrega > p.fecha_esperada
-)
-;
-
+        cli.
 ``` 
 
+<<<<<<< HEAD
 <br>
 
 ---
@@ -1492,3 +1493,5 @@ WHERE
 =======
 
 >>>>>>> b07554b (safe commit)
+=======
+>>>>>>> c8291db (feat: :docs: multitablas 5)
